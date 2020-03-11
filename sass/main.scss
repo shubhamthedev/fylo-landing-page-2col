@@ -291,8 +291,16 @@ body {
   width: 100%;
   display: block;
   height: 10rem;
+
   @include respond(phone) {
-    height: 5rem;
+    height: 7rem;
+    margin-bottom: -1rem;
+  }
+  @include respond(tab-port) {
+    margin-bottom: -1rem;
+  }
+  @include respond(tab-land) {
+    margin-bottom: -1rem;
   }
 }
 .feature-box {
@@ -470,6 +478,7 @@ body {
   }
 
   &__btn {
+    cursor: pointer;
     display: block;
     padding: 1.5rem 3rem;
     font-weight: 700;
