@@ -1,0 +1,510 @@
+/*Variables*/
+
+//color
+$color-primary-dark: hsl(243, 87%, 12%);
+$color-primary-light: hsl(238, 22%, 44%);
+$color-accent-light: hsl(224, 93%, 58%);
+$color-accent-dark: hsl(170, 45%, 43%);
+$color-grey-light-1: hsl(0, 0%, 75%);
+$color-grey-light-2: hsl(240, 80%, 98%);
+$color-black: #000;
+$color-white: #fff;
+
+//font
+$default-font-family: "Open Sans", sans-serif;
+$secondary-font-family: "Raleway", sans-serif;
+
+//grid
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 8rem;
+
+//Mixins
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+}
+//Utilites classes
+.u-margin-bottom-small {
+  margin-bottom: 2rem !important;
+}
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
+}
+.u-margin-bottom-big {
+  margin-bottom: 6rem !important;
+}
+.u-margin-bottom-huge {
+  margin-bottom: 8rem !important;
+}
+
+/*Main Sass Code*/
+
+//Basic Style Reset
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  @include respond(tab-land) {
+    font-size: 56.25%; //1rem = 9px
+  }
+  @include respond(tab-port) {
+    font-size: 50%; //1rem = 8px
+  }
+}
+body {
+  font-family: $default-font-family;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+//Defining the grid
+.row {
+  max-width: $grid-width;
+  margin: 0 auto;
+  @include clearfix;
+
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+  [class^="col-"] {
+    float: left;
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+    @include respond(tab-port) {
+      width: 100% !important;
+    }
+  }
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+  .col-1-of-4 {
+    width: calc((100% - 3 *#{$gutter-horizontal}) / 4);
+  }
+}
+//Typography
+.heading-primary {
+  font-size: 3.5rem;
+  font-family: $secondary-font-family;
+  line-height: 1.3;
+  font-weight: 700;
+  @include respond(phone) {
+    font-size: 3rem;
+    text-align: center;
+  }
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+}
+.para {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  @include respond(phone) {
+    text-align: center;
+  }
+  @include respond(tab-port) {
+    font-size: 1.4rem;
+  }
+}
+.heading-secondary {
+  font-size: 3rem;
+  font-family: $secondary-font-family;
+  @include respond(tab-port) {
+    font-size: 2.5rem;
+  }
+}
+.heading-tertiary {
+  font-size: 2.5rem;
+  font-family: $secondary-font-family;
+  color: $color-grey-light-2;
+  @include respond(tab-port) {
+    font-size: 2rem;
+  }
+}
+//Navigation
+.navigation {
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+
+  @include respond(tab-port) {
+    margin-top: 4rem;
+    margin-bottom: 0;
+  }
+  &__logo {
+    height: 4rem;
+    display: block;
+    @include respond(tab-port) {
+      height: 3rem;
+    }
+  }
+}
+//Header
+.header {
+  padding-top: 5rem;
+  padding-bottom: 15rem;
+  @include respond(tab-port) {
+    position: relative;
+  }
+  &__text-box {
+    transform: translateY(6rem);
+    @include respond(tab-port) {
+      transform: translateY(25rem);
+      margin-bottom: 15rem;
+    }
+  }
+  &__hero-img {
+    width: 100%;
+    display: block;
+    @include respond(tab-port) {
+      height: 20rem;
+      width: auto;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+// HEADER FORM
+.form {
+  &__input {
+    height: 3.5rem;
+    width: 55%;
+    margin-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 3px;
+    border: 0.1rem solid $color-grey-light-1;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
+  &__input-label {
+    display: none;
+  }
+  &__input::-webkit-input-placeholder {
+    font-family: inherit;
+    color: $color-grey-light-1;
+  }
+  &__btn {
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    width: 30%;
+    padding: 1rem 3rem;
+    background-color: $color-accent-light;
+    color: $color-grey-light-2;
+    border-radius: 3px;
+    font-weight: 700;
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    transition: all 0.3s;
+    @include respond(tab-port) {
+      font-size: 1.3rem;
+      display: block;
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      padding: 1.5rem 3rem;
+      width: 100%;
+    }
+    &:focus {
+      outline: none;
+      background-color: $color-primary-dark;
+      box-shadow: 0 0.25rem 0.5rem rgba($color-black, 0.2);
+    }
+  }
+}
+//Navigation
+.navigation {
+  &__list {
+    float: right;
+    list-style-type: none;
+    margin-top: -3rem;
+    @include respond(tab-port) {
+      margin-top: -2.2rem;
+    }
+  }
+  &__list-item {
+    display: inline-block;
+    &:not(:last-child) {
+      margin-right: 4rem;
+    }
+  }
+  &__link {
+    &:visited,
+    &:link {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: $color-black;
+      font-family: $secondary-font-family;
+      transition: color 0.2s;
+      @include respond(tab-port) {
+        font-size: 1.3rem;
+      }
+    }
+    &:active,
+    &:hover {
+      color: $color-grey-light-1;
+    }
+  }
+}
+
+//featuresS
+.bg-curve {
+  width: 100%;
+  display: block;
+  height: 10rem;
+  @include respond(phone) {
+    height: 5rem;
+  }
+}
+.feature-box {
+  margin-bottom: 2rem;
+  @include respond(tab-port) {
+    margin-top: 30rem;
+  }
+
+  &__para {
+    font-size: 1.3rem;
+    width: 85%;
+    @include respond(tab-port) {
+      font-size: 1.5rem;
+    }
+  }
+}
+.features__img {
+  width: 100%;
+  display: block;
+  @include respond(tab-port) {
+    height: 20rem;
+    width: auto;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+//Sections
+.section-features {
+  padding: 0 0 15rem 0;
+  background-color: #f8f8fe;
+  @include respond(tab-port) {
+    padding-bottom: 8rem;
+    position: relative;
+  }
+}
+.section-cta {
+  padding: 8rem 0;
+  background-color: $color-primary-light;
+}
+//footer
+.footer {
+  padding: 10rem 0;
+  background-color: $color-primary-dark;
+
+  &__list {
+    list-style: none;
+  }
+  &__list-item {
+    margin-bottom: 1rem;
+  }
+  &__link {
+    text-decoration: none;
+    color: $color-grey-light-1;
+    line-height: 2;
+    font-size: 1.4rem;
+    font-weight: 700;
+
+    img {
+      display: inline-block;
+      margin-right: 2rem;
+      height: 1.5rem;
+    }
+  }
+}
+//anchor link features
+.btn--underline {
+  &:link,
+  &:visited {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-family: $secondary-font-family;
+    color: $color-accent-dark;
+    border-bottom: 1px solid $color-accent-dark;
+    display: inline-block;
+    transition: all 0.3s;
+
+    @include respond(tab-port) {
+      margin-bottom: 3rem;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  span {
+    .icon-arrow {
+      display: inline-block;
+      height: 1.6rem;
+      transform: translateY(0.2rem);
+    }
+  }
+}
+//quote box
+.quote-box {
+  background-color: $color-white;
+  padding: 1.5rem 3rem;
+  width: 62%;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.8rem 0.8rem rgba($color-black, 0.1);
+  @include respond(tab-port) {
+    width: 80%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  .icon-quote {
+    height: 1.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  &__text {
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .quote-author {
+    display: flex;
+    align-items: center;
+    &__img {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+    &__text-box {
+      h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+    }
+  }
+}
+//cta box
+.cta-box {
+  @include respond(tab-port) {
+    text-align: center;
+  }
+  &__text {
+    font-size: 1.4rem;
+    width: 83%;
+    color: $color-grey-light-2;
+    @include respond(tab-port) {
+      font-size: 1.6rem;
+      margin-left: auto;
+      margin-right: auto;
+      width: 76%;
+    }
+  }
+}
+.form-cta {
+  &__label {
+    display: none;
+  }
+  &__input {
+    display: block;
+    background-color: $color-grey-light-2;
+    border: none;
+    height: 4rem;
+    width: 70%;
+    padding-left: 1rem;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    box-shadow: 0 1rem 1rem rgba($color-black, 0.2);
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
+  &__input::-webkit-input-placeholder {
+    font-family: inherit;
+    color: $color-grey-light-1;
+  }
+  &__input::-moz-placeholder {
+    font-family: inherit;
+    color: $color-grey-light-1;
+  }
+
+  &__btn {
+    display: block;
+    padding: 1.5rem 3rem;
+    font-weight: 700;
+    color: $color-white;
+    border: none;
+    border-radius: 3px;
+    background-color: $color-accent-light;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+    transition: all 0.3s;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+    &:focus {
+      outline: none;
+      background-color: $color-primary-dark;
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+  }
+}
+//social list
+.social-list {
+  list-style: none;
+  @include respond(tab-port) {
+    text-align: center;
+  }
+  &__item {
+    display: inline-block;
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-grey-light-2;
+  }
+}
