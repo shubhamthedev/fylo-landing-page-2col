@@ -395,3 +395,5 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: #f6f6fe; }
+    .social-list__link span {
+      display: none; }
